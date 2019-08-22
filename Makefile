@@ -10,7 +10,7 @@ primary:
 	md5sum -c $(BASE)GM24385.chr20.fq.md5
 	sed -n '1~4s/^@/>/p;2~4p' GM24385.chr20.fq > GM24385.chr20.fasta
 
-secondary: shasta minimap2 samtools marginpolish helen_call_consensus helen_stitch
+secondary: shasta minimap2 samtools marginpolish helen
 	
 tertiary: freebayes
 
@@ -50,7 +50,7 @@ marginpolish:
 		/opt/MarginPolish/params/allParams.np.human.guppy-ff-235.json -t $(CPU) -o /data/marginPolish/output -f
 	mv marginPolish/output.fa marginPolish.fa
 
-helen_call_consensus:
+helen:
     # download the HELEN model and run call_consensus
 	wget -N https://storage.googleapis.com/kishwar-helen/helen_trained_models/v0.0.1/r941_flip235_v001.pkl
 	# delete previous run data (if there is any)
@@ -65,8 +65,7 @@ helen_call_consensus:
 		-w 0 \
 		-t $(CPU)
 
-helen_stitch:
-    # finally create the polished assembly
+    # finally create the polished assembly using stitch
         docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
     	        kishwars/helen:0.0.1.cpu \
     	        stitch.py \
