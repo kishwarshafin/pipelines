@@ -67,13 +67,13 @@ helen_call_consensus:
 
 helen_stitch:
     # finally create the polished assembly
-    docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
-    	kishwars/helen:0.0.1.cpu \
-    	stitch.py \
-    	-i $(ID)_helen_hdf5/$(ID)_prediction.hdf \
-    	-o . \
-    	-p $(ID)_shasta_mp_helen_assembly \
-    	-t $(CPU)
+        docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
+    	    kishwars/helen:0.0.1.cpu \
+    	    stitch.py \
+    	    -i $(ID)_helen_hdf5/$(ID)_prediction.hdf \
+    	    -o . \
+    	    -p $(ID)_shasta_mp_helen_assembly \
+    	    -t $(CPU)
 
 freebayes:
 	echo "Downloading references..."
