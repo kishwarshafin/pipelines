@@ -1,5 +1,7 @@
 ID ?= GM24385.chr20
 CPU ?= 64
+# reserve some CPUs while running call_consensus
+HELEN_CALL_CONSENSUS_CPU ?= 56
 BASE ?= $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 
 primary:
@@ -63,14 +65,14 @@ helen:
 		-o $(ID)_helen_hdf5/ \
 		-p $(ID)_prediction \
 		-w 0 \
-		-t $(CPU)
+		-t $(HELEN_CALL_CONSENSUS_CPU)
 	docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
 		kishwars/helen:0.0.1.cpu \
-    	stitch.py \
-    	-i $(ID)_helen_hdf5/$(ID)_prediction.hdf \
-    	-o helen_output/ \
-    	-p $(ID)_shasta_mp_helen_assembly \
-    	-t $(CPU)
+		stitch.py \
+		-i $(ID)_helen_hdf5/$(ID)_prediction.hdf \
+		-o helen_output/ \
+		-p $(ID)_shasta_mp_helen_assembly \
+		-t $(CPU)
 
 freebayes:
 	echo "Downloading references..."
