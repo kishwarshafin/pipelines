@@ -53,10 +53,8 @@ marginpolish:
 helen_call_consensus:
     # download the HELEN model and run call_consensus
 	wget -N https://storage.googleapis.com/kishwar-helen/helen_trained_models/v0.0.1/r941_flip235_v001.pkl
-
 	# delete previous run data (if there is any)
 	rm -rf $(ID)_helen_hdf5/
-
 	docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
 		kishwars/helen:0.0.1.cpu \
 		call_consensus.py -i /data/marginPolish/ -m r941_flip235_v001.pkl -o $(ID)_helen_hdf5/ -w 0 -t $(CPU)
@@ -65,7 +63,7 @@ helen_stitch:
     # finally create the polished assembly
     docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
     		kishwars/helen:0.0.1.cpu \
-    		stitch.py -i $(ID)_helen_hdf5/*.hdf5 -o . -p $(ID)_shasta_mp_helen_assembly -t $(CPU)
+    		stitch.py -i $(ID)_helen_hdf5/$(wildcard *.hdf5) -o . -p $(ID)_shasta_mp_helen_assembly -t $(CPU)
 
 
 freebayes:
