@@ -70,7 +70,7 @@ helen:
 		kishwars/helen:0.0.1.cpu \
 		stitch.py \
 		-i $(ID)_helen_hdf5/$(ID)_prediction.hdf \
-		-o helen_output/ \
+		-o /data/ \
 		-p $(ID)_shasta_mp_helen_assembly \
 		-t $(CPU)
 

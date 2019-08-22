@@ -24,11 +24,17 @@ sudo gpasswd -a $USER docker
 newgrp docker
 ```
 
+TIPS:
+To clean all docker images to re-download  them all:
+```bash
+docker rmi $(docker images -a -q)
+```
+
 ## Quick Start
 
 Clone this repo, create a directory for data and run a test sample:
 
-```
+```bash
 git clone https://github.com/ucsc-upd/pipelines.git
 mkdir data
 cd data
