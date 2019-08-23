@@ -9,7 +9,7 @@ primary:
     # I think there should be a check to see if the file is FASTA or FASTQ then convert if needed.
 	echo "Downloading GM24385 test sample..."
 	wget -N https://s3-us-west-2.amazonaws.com/lc2019/shasta/ecoli_test/r94_ec_rad2.181119.60x-10kb.fasta.gz
-	md5sum -c r94_ec_rad2.181119.60x-10kb.fasta.md5
+	# md5sum -c r94_ec_rad2.181119.60x-10kb.fasta.md5
 	# sed -n '1~4s/^@/>/p;2~4p' r94_ec_rad2.181119.60x-10kb.fasta > r94_ec_rad2.181119.60x-10kb.fasta
 
 secondary: shasta minimap2 samtools marginpolish helen
