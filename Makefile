@@ -29,7 +29,7 @@ minimap2:
     # Map the reads back to the Shasta assembly
 	docker run -it --rm --user=`id -u`:`id -g` --cpus="$(CPU)" -v `pwd`:/data \
 		tpesout/minimap2@sha256:5df3218ae2afebfc06189daf7433f1ade15d7cf77d23e7351f210a098eb57858 \
-		-ax map-ont -t $(CPU) shasta.fasta $(ID).fq
+		-ax map-ont -t $(CPU) shasta.fasta $(ID).fasta
 
 samtools:
     # convert the mapping to to BAM
